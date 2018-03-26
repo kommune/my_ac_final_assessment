@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-sm bg-light">
+
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <%= link_to 'Notes List', notes_path %>&nbsp;&nbsp;
+    </li>
+    <li class="nav-item">
+      <%= link_to 'New Note', new_note_path %>&nbsp;&nbsp;
+    </li>
+    <li class="nav-item">
+      <%= link_to 'Users List', notes_path %>
+    </li>
+  </ul>
+
+  <ul class="navbar-nav">
+    <% if current_user %>
+      Hi, <%= current_user.email %>&nbsp;
+      <%= link_to('Log Out', destroy_user_session_path, method: :delete) %>&nbsp;&nbsp;
+      <%= link_to('Change Password', edit_user_registration_path ) %>
+    <% else %>
+      <%= link_to('Register', new_user_registration_path ) %>&nbsp;&nbsp;
+      <%= link_to('Log In', new_user_session_path ) %>
+    <% end %>
+  </ul>
+
+</nav>

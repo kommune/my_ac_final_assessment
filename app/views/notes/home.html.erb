@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 col-md-4">
+      <p>All Users:</p>
+      <% @users.each do |user| %>
+        <p><%= user.email %></p>
+      <% end %>
+    </div>
+    <div class="col-sm-6 col-md-4">
+      <p>All Notes:</p>
+      <% @notes.each do |note| %>
+        <p><%= note.title %> - <%= note.body %></p>
+      <% end %>
+    </div>
+  </div>
+</div>
+

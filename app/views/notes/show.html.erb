@@ -1,0 +1,5 @@
+<h3><%= @note.title %></h3>
+<p><%= @note.body %></p>
+<p><%= link_to 'Show', note_path(@note), class: "btn btn-outline-primary btn-sm" %>
+    <%= link_to 'Edit', edit_note_path(@note), class: "btn btn-outline-primary btn-sm" %>
+    <%= link_to 'Delete', note_path(@note), method: :delete, data: {confirm:"Are you sure?"}, remote: true, class: "btn btn-outline-primary btn-sm" %></p>

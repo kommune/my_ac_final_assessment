@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 col-md-4">
+      <% @users.each do |user| %>
+        <p>Following: <%= user.email %></p>
+      <% end %>
+    </div>
+    <div class="col-sm-6 col-md-4">
+      <strong><p>Notes of people I'm following:</p></strong>
+      <% @following_notes.each do |following_note| %>
+        <p><%= following_note.title %> - <%= following_note.body %></p>
+      <% end %>
+    </div>
+  </div>
+  <p></p>
+  <div class="row">
+    <h1>My Notes:</h1>
+    <div class="col-sm-6 col-md-4">
+      <% @notes.each do |note| %>
+        <h3><%= note.title %></h3>
+        <p><%= note.body %></p>
+        <p><%= link_to 'Show', note_path(note), class: "btn btn-outline-primary btn-sm" %>
+           <%= link_to 'Edit', edit_note_path(note), class: "btn btn-outline-primary btn-sm" %>
+           <%= link_to 'Delete', note_path(note), method: :delete, data: {confirm:"Are you sure?"}, remote: true, class: "btn btn-outline-primary btn-sm" %></p>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<% if @note.errors.any? %>
+  <h2>We have an error here!</h2>
+  <ul>
+    <% @note.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_for @note do |f| %>
+  <%= f.label :title, "Title" %>
+  <%= f.text_field :title %>
+  
+  <%= f.label :body, "Body" %>
+  <%= f.text_area :body %>
+
+  <%= f.submit %>
+<% end %>
