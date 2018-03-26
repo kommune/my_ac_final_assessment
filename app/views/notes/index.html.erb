@@ -9,6 +9,11 @@
       <strong><p>Notes of people I'm following:</p></strong>
       <% @following_notes.each do |following_note| %>
         <p><%= following_note.title %> - <%= following_note.body %></p>
+        <p><% if following_note.likes.any? do |like| like.user == current_user end %>
+          <%= link_to 'Unlike', unlike_note_path(following_note), method: :delete, class: "btn btn-outline-danger btn-sm" %></p>
+        <% else %>
+          <%= link_to 'Like', like_note_path(following_note), method: :post, class: "btn btn-outline-success btn-sm" %>
+        <% end %>
       <% end %>
     </div>
   </div>

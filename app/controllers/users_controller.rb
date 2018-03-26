@@ -3,34 +3,23 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-
-    def follower?(user)
-      followers.find_by(user.id)
-    end
-  
-    def following?(user)
-      byebug
-      followings.find_by(params:[:id])
-    end
   end
 
   def follow
-    @follow = Relationship.new(follower_id: params[:follower], following_id: params[:following])
-    @follow.save
+    followee = User.find(params[:id])
+    current_user.followings << followee
     redirect_to users_path
   end
 
   def unfollow
-    @unfollow = Relationship.find(params[:id])
-    @unfollow.destroy
+    relationship = Relationship.find_by(following_id: params[:id])
+    current_user.followings.delete(relationship.following_id)
     redirect_to users_path
   end
 
-  def follower
-    @users = current_user.followers
-  end
+  private
 
-  def following
-    @users = current_user.followings
+  def user_params
+    params.require(:user).permit(:email)
   end
 end

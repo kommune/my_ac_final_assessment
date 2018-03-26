@@ -9,7 +9,7 @@ class NotesController < ApplicationController
 
   def index
     @users = current_user.followings
-    @following_notes = Note.where("user_id = ?", @users.ids)
+    @following_notes = Note.where(user_id: @users.ids)
     @notes = current_user.notes
   end
 
@@ -56,14 +56,27 @@ class NotesController < ApplicationController
   def like
     @like = Like.new(user: current_user, note_id: params[:id])
     if @like.save
-      @like = Like.new
+      redirect_to notes_path
     end
   end
 
-  def dislike
+  def unlike
     @like = Like.find_by(user: current_user, note_id: params[:id] )
     @like.destroy
+    redirect_to notes_path
   end
+
+  # def follow
+  #   followee = User.find(params[:id])
+  #   current_user.followings << followee
+  #   redirect_to users_path
+  # end
+
+  # def unfollow
+  #   relationship = Relationship.find_by(following_id: params[:id])
+  #   current_user.followings.delete(relationship.following_id)
+  #   redirect_to users_path
+  # end
 
   private
 

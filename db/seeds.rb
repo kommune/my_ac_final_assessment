@@ -15,7 +15,3 @@ Note.create!(title: 'Title 3', body: 'Body 3', user_id: 3)
 Note.create!(title: 'Title 4', body: 'Body 4', user_id: 1)
 Note.create!(title: 'Title 5', body: 'Body 5', user_id: 2)
 Note.create!(title: 'Title 6', body: 'Body 6', user_id: 3)
-
-Relationship.create!(follower_id: 1, following_id: 2)
-Relationship.create!(follower_id: 2, following_id: 3)
-Relationship.create!(follower_id: 3, following_id: 1)
