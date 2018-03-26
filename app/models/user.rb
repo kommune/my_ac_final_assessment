@@ -4,7 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  validates_presence_of :email
+  validates_presence_of :encrypted_password
+  
   has_many :notes, dependent: :destroy
+  has_many :likes, dependent: :destroy
 
   has_many :active_relationships, foreign_key: "follower_id", class_name: "Relationship", dependent: :destroy
   has_many :passive_relationships, foreign_key: "following_id", class_name: "Relationship", dependent: :destroy

@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6 col-md-4">
+      <h1>All Users:</h1>
+      <% @users.each do |user| %>
+        <p><%= user.email %></p>
+        <p>
+        <% if current_user.following?(user) %>
+          <%= link_to 'Unfollow', unfollow_user_path(user), method: :delete, data: {confirm:"Are you sure?"}, class: "btn btn-outline-primary btn-sm" %>
+        <% else %>
+          <%= link_to 'Follow', follow_user_path(user), class: "btn btn-outline-primary btn-sm" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -54,11 +54,15 @@ class NotesController < ApplicationController
   end
 
   def like
-    
+    @like = Like.new(user: current_user, note_id: params[:id])
+    if @like.save
+      @like = Like.new
+    end
   end
 
   def dislike
-    
+    @like = Like.find_by(user: current_user, note_id: params[:id] )
+    @like.destroy
   end
 
   private
