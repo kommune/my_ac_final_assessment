@@ -55,7 +55,10 @@ class NotesController < ApplicationController
 
   def like
     @like = Like.new(user: current_user, note_id: params[:id])
+    @note = Note.find(params[:id])
+    @user = @note.user
     if @like.save
+      UserMailer.like_email(@user).deliver_later
       redirect_to notes_path
     end
   end
@@ -63,20 +66,11 @@ class NotesController < ApplicationController
   def unlike
     @like = Like.find_by(user: current_user, note_id: params[:id] )
     @like.destroy
+    @note = Note.find(params[:id])
+    @user = @note.user
+    UserMailer.unlike_email(@user).deliver_later
     redirect_to notes_path
   end
-
-  # def follow
-  #   followee = User.find(params[:id])
-  #   current_user.followings << followee
-  #   redirect_to users_path
-  # end
-
-  # def unfollow
-  #   relationship = Relationship.find_by(following_id: params[:id])
-  #   current_user.followings.delete(relationship.following_id)
-  #   redirect_to users_path
-  # end
 
   private
 
